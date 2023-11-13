@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="empresa">
+    <!-- Registrar empresa -->
+    <insert id="agregarEmpresa" parameterType="modelo.pojo.Empresa">
+        INSERT INTO Empresas (nombre, nombreComercial, logo, representanteLegal, email, telefono, paginaWeb, RFC, estatus, direccionID)
+        VALUES (#{nombre}, #{nombreComercial}, #{logo}, #{representanteLegal}, #{email}, #{telefono}, #{paginaWeb}, #{RFC}, #{estatus}, #{direccionID})
+    </insert>
+
+    <!-- Editar empresa -->
+    <update id="editarEmpresa" parameterType="modelo.pojo.Empresa">
+        UPDATE Empresa
+        SET nombre = #{nombre},
+        nombreComercial = #{nombreComercial},
+        logo = #{logo},
+        representanteLegal = #{representanteLegal},
+        email = #{email},
+        telefono = #{telefono},
+        paginaWeb = #{paginaWeb},
+        estatus = #{estatus},
+        direccionID = #{direccionID} 
+        WHERE RFC = #{RFC}
+    </update>
+
+    <!-- Eliminar empresa -->
+    <delete id="eliminarEmpresa" parameterType="String">
+        DELETE FROM Empresa
+        WHERE RFC = #{RFC}
+    </delete>
+
+    <!-- Buscar empresa por nombre, RFC o representante -->
+    <select id="buscarEmpresa" resultType="modelo.pojo.Empresa" parameterType="String">
+        SELECT *
+        FROM Empresa
+        WHERE nombre LIKE CONCAT('%', #{param}, '%')
+        OR RFC LIKE CONCAT('%', #{param}, '%')
+        OR representanteLegal LIKE CONCAT('%', #{param}, '%')
+    </select>
+    
+    <!-- Numero de sucursales asociadas -->
+<select id="contarSucursalesAsociadas" resultType="int" parameterType="String">
+    SELECT COUNT(*) FROM Sucursal
+    WHERE empresaRFC = #{RFC}
+</select>
+
+</mapper>

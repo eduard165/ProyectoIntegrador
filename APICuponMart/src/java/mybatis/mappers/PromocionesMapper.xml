@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="promocion">
+    <!-- Registrar promoción -->
+    <insert id="agregarPromocion" parameterType="modelo.pojo.Promocion">
+        INSERT INTO Promociones (nombrePromocion, descripcion, imagen, fechaInicio, fechaTermino, restricciones, tipoPromocion, porcentajeDescuento, codigoPromocion, estatus, empresaRFC)
+        VALUES (#{nombrePromocion}, #{descripcion}, #{imagen}, #{fechaInicio}, #{fechaTermino}, #{restricciones}, #{tipoPromocion}, #{porcentajeDescuento}, #{codigoPromocion}, #{estatus}, #{empresaRFC})
+    </insert>
+
+    <!-- Editar promoción -->
+    <update id="editarPromocion" parameterType="modelo.pojo.Promocion">
+        UPDATE Promociones
+        SET nombrePromocion = #{nombrePromocion},
+        descripcion = #{descripcion},
+        imagen = #{imagen},
+        fechaInicio = #{fechaInicio},
+        fechaTermino = #{fechaTermino},
+        restricciones = #{restricciones},
+        tipoPromocion = #{tipoPromocion},
+        porcentajeDescuento = #{porcentajeDescuento},
+        codigoPromocion = #{codigoPromocion},
+        estatus = #{estatus},
+        empresaRFC = #{empresaRFC}
+        WHERE idPromociones = #{idPromociones}
+    </update>
+
+    <!-- Eliminar promoción -->
+    <delete id="eliminarPromocion" parameterType="Integer">
+        DELETE FROM Promociones
+        WHERE idPromociones = #{idPromociones}
+    </delete>
+
+    <!-- Buscar promoción por fecha de inicio, fecha término o nombre -->
+    <select id="buscarPromocion" resultType="modelo.pojo.Promocion" parameterType="String">
+        SELECT *
+        FROM Promociones
+        WHERE fechaInicio LIKE CONCAT('%', #{param}, '%')
+        OR fechaTermino LIKE CONCAT('%', #{param}, '%')
+        OR nombrePromocion LIKE CONCAT('%', #{param}, '%')
+    </select>
+
+    <!-- Obtener sucursales asociadas a una promoción -->
+    <select id="obtenerSucursalesPromocion" resultType="modelo.pojo.Sucursal" parameterType="Integer">
+        SELECT s.*
+        FROM Sucursales s
+        INNER JOIN Sucursales_Promociones sp ON s.idSucursales = sp.sucursalID
+        WHERE sp.promocionID = #{idPromociones}
+    </select>
+    
+    <update id="cambiarEstadoPromocion" parameterType="java.util.Map">
+    UPDATE Promocion SET estatusID = #{nuevoEstatusID} WHERE idPromocion = #{idPromocion}
+</update>
+
+</mapper>
