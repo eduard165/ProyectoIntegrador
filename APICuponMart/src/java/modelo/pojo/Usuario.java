@@ -9,7 +9,7 @@ public class Usuario {
     private String CURP;
     private String correoElectronico;
     private String username;
-    private String password; // Ajusta el nombre del atributo según tu script de base de datos
+    private String password; 
     private Integer rolID;
     private String empresaRFC; // Puede ser nulo si el usuario no es Administrador Comercial
 
@@ -116,12 +116,15 @@ public class Usuario {
                     return "Administrador general";
                 case 2:
                     return "Administrador comercial";
-                // Agrega más casos según sea necesario para otros roles
+ 
                 default:
                     return "Rol no especificado";
             }
         } else {
             return "Rol no especificado";
         }
+    }
+    public Boolean todosAtributosLlenos(){
+        return this.nombre.isEmpty() && this.password.isEmpty();
     }
 }
