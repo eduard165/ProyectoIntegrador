@@ -85,6 +85,16 @@ public Mensaje eliminarEmpresa(@PathParam("RFC") String RFC) {
         }
       return  EmpresaDAO.buscarEmpresa(parametro);
     }
+    
+    @Path("/buscarEmpresas/{parametro}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Empresa> buscarEmpresas(@PathParam("parametro") String parametro) {
+        if (parametro == null || parametro.trim().isEmpty()) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+      return  EmpresaDAO.buscarEmpresas(parametro);
+    }
 
 
     private boolean validarCamposObligatorios(Empresa empresa) {

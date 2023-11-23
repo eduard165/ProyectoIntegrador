@@ -110,9 +110,7 @@ public class EmpresaDAO {
         SqlSession sqlSession = MyBatisUtil.getSession();
         if (sqlSession != null) {
             try {
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("param", parametro);
-                empresas = sqlSession.selectList("empresa.buscarEmpresa", parameters);
+                empresas = sqlSession.selectList("empresa.buscarEmpresa", parametro);
             } finally {
                 sqlSession.close();
             }
@@ -124,10 +122,7 @@ public static Empresa buscarEmpresa(String parametro) {
     SqlSession sqlSession = MyBatisUtil.getSession();
     if (sqlSession != null) {
         try {
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("param", parametro);
-
-            empresa = sqlSession.selectOne("empresa.buscarEmpresa", parameters);
+            empresa = sqlSession.selectOne("empresa.buscarEmpresa", parametro);
         } finally {
             sqlSession.close();
         }

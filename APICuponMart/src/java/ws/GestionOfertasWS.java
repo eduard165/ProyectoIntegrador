@@ -8,6 +8,7 @@ package ws;
 import com.google.gson.Gson;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -23,14 +24,13 @@ import modelo.pojo.Cupon;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Promocion;
 
-
 /**
  *
  * @author eduar
  */
 @Path("GestionOfertas")
 public class GestionOfertasWS {
-     
+
     @POST
     @Path("/registrarPromocion")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -38,56 +38,68 @@ public class GestionOfertasWS {
     public Mensaje registrarPromocionl(String json) {
         Gson gson = new Gson();
         Promocion promocion = gson.fromJson(json, Promocion.class);
-       if(!promocion.todosAtributosLlenos()){
+        if (!promocion.todosAtributosLlenos()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
-       }
-         return  PromocionDAO.registrarPromocion(promocion);
+        }
+        return PromocionDAO.registrarPromocion(promocion);
     }
 
     @PUT
-    @Path("/editarPromocion/{idPromocion}")
+    @Path("/editarPromocion")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje editarPromocion(@PathParam("idPromocion") int id, String json) {
-         Gson gson = new Gson();
- Promocion promocion = gson.fromJson(json, Promocion.class);
-        if(promocion.todosAtributosLlenos() && id > 0 ){
-              throw new WebApplicationException(Response.Status.BAD_REQUEST);
+    public Mensaje editarPromocion(String json) {
+        Gson gson = new Gson();
+        Promocion promocion = gson.fromJson(json, Promocion.class);
+        if (promocion.todosAtributosLlenos()) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return PromocionDAO.editarPromocion(promocion);
     }
-    
+
     @PUT
-    @Path("/cambiarEstadoPromocion/{idPromocion}/{nuevoEstado}")
+    @Path("/editarEstadoPromocion/{idPromocion}/{nuevoEstado}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje editarEstadoDeLaPromocion(@PathParam("idPromocion") int id, 
-                                                    @PathParam("nuevoEstado") int nuevoEstado) { 
-        if(id > 0 && nuevoEstado >0 && nuevoEstado < 0 ){
-               return PromocionDAO.cambiarEstadoPromocion(id, nuevoEstado);
-        }else{
+    public Mensaje editarEstadoDeLaPromocion(@PathParam("idPromocion") int id,
+            @PathParam("nuevoEstado") int nuevoEstado) {
+        if (id > 0 && nuevoEstado > 0 && nuevoEstado < 0) {
+            return PromocionDAO.cambiarEstadoPromocion(id, nuevoEstado);
+        } else {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
     }
- @GET
-    @Path("/buscarPromocion/{parametro}")
+
+    @GET
+    @Path("/buscarPromociones/{parametro}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Promocion> buscarPromocion(@PathParam("parametro") String parametro) {
         if (parametro == null || parametro.trim().isEmpty()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        return PromocionDAO.buscarPromocion(parametro);
+        return PromocionDAO.buscarPromociones(parametro);
     }
+    @DELETE
+    @Path("/eliminarPromocion/{idPromocion}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje eliminarPromocion(@PathParam ("idPromocion") Integer idPromocion){
+       if(idPromocion<0 && idPromocion == null){
+           throw new WebApplicationException(Response.Status.BAD_REQUEST);
+       } 
+       return PromocionDAO.eliminarPromocion(idPromocion);
+    }
+//////////////////////* CUPONES*//////////////////////////////////////////////
     @GET
     @Path("/cuponesDisponibles")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cupon> cuponesDisponibles() {
         return CuponDAO.listarCuponesDisponibles();
     }
-        @GET
+
+    @GET
     @Path("/cuponesDisponibles/{codigoCupon}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje cangearCupon(@PathParam("codigoCupon") String codigoCupon ) {
-        if(codigoCupon == null || codigoCupon.isEmpty()){
+    public Mensaje cangearCupon(@PathParam("codigoCupon") String codigoCupon) {
+        if (codigoCupon == null || codigoCupon.isEmpty()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return CuponDAO.canjearCupon(codigoCupon);

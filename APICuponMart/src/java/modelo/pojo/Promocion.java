@@ -14,24 +14,23 @@ import java.time.LocalDate;
  */
 public class Promocion {
 
-    private int idPromocion;
+    private Integer idPromocion;
     private String nombrePromocion;
     private String descripcion;
     private String imagen;
-    private LocalDate fechaInicio;
-    private LocalDate fechaTermino;
+    private String fechaInicio;
+    private String fechaTermino;
     private String restricciones;
-    private Integer tipoPromocionID; // Referencia a la entidad TipoPromocion
+    private Integer tipoPromocionID;
     private BigDecimal porcentajeDescuento;
     private String codigoPromocion;
-    private Integer estatus;
     private String empresaRFC;
     private Integer estatusID;
 
     public Promocion() {
     }
 
-    public Promocion(int idPromocion, String nombrePromocion, String descripcion, String imagen, LocalDate fechaInicio, LocalDate fechaTermino, String restricciones, Integer tipoPromocionID, BigDecimal porcentajeDescuento, String codigoPromocion, Integer estatus, String empresaRFC, Integer estatusID) {
+    public Promocion(Integer idPromocion, String nombrePromocion, String descripcion, String imagen, String fechaInicio, String fechaTermino, String restricciones, Integer tipoPromocionID, BigDecimal porcentajeDescuento, String codigoPromocion, String empresaRFC, Integer estatusID) {
         this.idPromocion = idPromocion;
         this.nombrePromocion = nombrePromocion;
         this.descripcion = descripcion;
@@ -42,16 +41,15 @@ public class Promocion {
         this.tipoPromocionID = tipoPromocionID;
         this.porcentajeDescuento = porcentajeDescuento;
         this.codigoPromocion = codigoPromocion;
-        this.estatus = estatus;
         this.empresaRFC = empresaRFC;
         this.estatusID = estatusID;
     }
 
-    public int getIdPromocion() {
+    public Integer getIdPromocion() {
         return idPromocion;
     }
 
-    public void setIdPromocion(int idPromocion) {
+    public void setIdPromocion(Integer idPromocion) {
         this.idPromocion = idPromocion;
     }
 
@@ -79,19 +77,19 @@ public class Promocion {
         this.imagen = imagen;
     }
 
-    public LocalDate getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaTermino() {
+    public String getFechaTermino() {
         return fechaTermino;
     }
 
-    public void setFechaTermino(LocalDate fechaTermino) {
+    public void setFechaTermino(String fechaTermino) {
         this.fechaTermino = fechaTermino;
     }
 
@@ -127,14 +125,6 @@ public class Promocion {
         this.codigoPromocion = codigoPromocion;
     }
 
-    public Integer getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(Integer estatus) {
-        this.estatus = estatus;
-    }
-
     public String getEmpresaRFC() {
         return empresaRFC;
     }
@@ -151,6 +141,7 @@ public class Promocion {
         this.estatusID = estatusID;
     }
 
+
     public boolean todosAtributosLlenos() {
         return nombrePromocion != null
                 && descripcion != null
@@ -161,7 +152,6 @@ public class Promocion {
                 && tipoPromocionID != null
                 && porcentajeDescuento != null
                 && codigoPromocion != null
-                && estatus != null
                 && empresaRFC != null
                 && estatusID != null;
     }

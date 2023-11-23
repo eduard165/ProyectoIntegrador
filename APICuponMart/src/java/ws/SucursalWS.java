@@ -25,7 +25,6 @@ import modelo.pojo.Sucursal;
 @Path("sucursales")
 public class SucursalWS {
 
-  
     @POST
     @Path("/registrar")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -33,42 +32,63 @@ public class SucursalWS {
     public Mensaje registrarSucursal(String json) {
         Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-       if(!sucursal.todosAtributosLlenos()){
+        if (sucursal == null
+                && sucursal.getEmpresaRFC() == null
+                && sucursal.getDireccionID() < 0
+                && sucursal.getNombre() == null
+                && sucursal.getTelefono() == null
+                && sucursal.getNombreEncargado() == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
-       }
-         return  SucursalDAO.agregarSucursal(sucursal);
+        }
+        return SucursalDAO.agregarSucursal(sucursal);
     }
 
     @PUT
-    @Path("/editar/{id}")
+    @Path("/editarl")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje editarSucursal(@PathParam("id") int id, String json) {
-         Gson gson = new Gson();
+    public Mensaje editarSucursal(String json) {
+        Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-        if(sucursal.todosAtributosLlenos() && id > 0 ){
-              throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        if (sucursal == null
+                && sucursal.getIdSucursal() < 0
+                && sucursal.getEmpresaRFC() == null
+                && sucursal.getDireccionID() < 0
+                && sucursal.getNombre() == null
+                && sucursal.getTelefono() == null
+                && sucursal.getNombreEncargado() == null ) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.editarSucursal(sucursal);
     }
 
     @DELETE
-    @Path("/eliminar/{id}")
+    @Path("/eliminar/{idSucursal}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarSucursal(@PathParam("id") int id) {
-     if(id >0){
-        return SucursalDAO.eliminarSucursal(id);
-     }else
-         return new Mensaje(true, "El id esta vacio");
+    public Mensaje eliminarSucursal(@PathParam("idSucursal") int idSucursal) {
+        if (idSucursal > 0) {
+            return SucursalDAO.eliminarSucursal(idSucursal);
+        } else {
+            return new Mensaje(true, "El id esta vacio");
+        }
     }
 
     @GET
     @Path("/buscar/{parametro}")
     @Produces(MediaType.APPLICATION_JSON)
     public Sucursal buscarSucursal(@PathParam("parametro") String parametro) {
-        if (parametro == null || parametro.trim().isEmpty()) {
+        if (parametro == null || parametro.isEmpty()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.buscarSucursal(parametro);
+    }
+    @GET
+    @Path("/buscarLista/{parametro}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Sucursal> buscarSucursales(@PathParam("parametro") String parametro) {
+        if (parametro == null || parametro.isEmpty()) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return SucursalDAO.buscarSucursales(parametro);
     }
 }

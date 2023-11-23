@@ -19,16 +19,16 @@ import org.apache.ibatis.session.SqlSession;
  * @author eduar
  */
 public class PromocionDAO {
+    
+    
     public static Mensaje registrarPromocion(Promocion promocion) {
     Mensaje msj = new Mensaje();
     msj.setError(true);
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
-            int filasAfectadas = sqlSession.insert("promocion.registrarPromocion", promocion);
+            int filasAfectadas = sqlSession.insert("promocion.agregarPromocion", promocion);
             sqlSession.commit();
-
             if (filasAfectadas > 0) {
                 msj.setError(false);
                 msj.setMensaje("Promoción registrada correctamente");
@@ -48,12 +48,10 @@ public class PromocionDAO {
     Mensaje msj = new Mensaje();
     msj.setError(true);
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
             int filasAfectadas = sqlSession.update("promocion.editarPromocion", promocion);
             sqlSession.commit();
-
             if (filasAfectadas > 0) {
                 msj.setError(false);
                 msj.setMensaje("Promoción editada correctamente");
@@ -73,12 +71,10 @@ public static Mensaje eliminarPromocion(Integer idPromocion) {
     Mensaje msj = new Mensaje();
     msj.setError(true);
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
             int filasAfectadas = sqlSession.delete("promocion.eliminarPromocion", idPromocion);
             sqlSession.commit();
-
             if (filasAfectadas > 0) {
                 msj.setError(false);
                 msj.setMensaje("Promoción eliminada correctamente");
@@ -98,7 +94,6 @@ public static Mensaje cambiarEstadoPromocion(Integer idPromocion, Integer nuevoE
     Mensaje msj = new Mensaje();
     msj.setError(true);
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
             Map<String, Object> parameters = new HashMap<>();
@@ -124,7 +119,7 @@ public static Mensaje cambiarEstadoPromocion(Integer idPromocion, Integer nuevoE
     return msj;
 }
 
-public static List<Promocion> buscarPromocion(String parametro) {
+public static List<Promocion> buscarPromociones(String parametro) {
     List<Promocion> promociones = new ArrayList<>();
     SqlSession sqlSession = MyBatisUtil.getSession();
 
@@ -132,7 +127,7 @@ public static List<Promocion> buscarPromocion(String parametro) {
         try {
             Map<String, Object> parameters = new HashMap<>();
             parameters.put("param", parametro);
-            promociones = sqlSession.selectList("promocion.buscarPromocion", parameters);
+            promociones = sqlSession.selectList("promocion.buscarPromociones", parameters);
         } finally {
             sqlSession.close();
         }

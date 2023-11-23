@@ -20,6 +20,7 @@ import org.apache.ibatis.session.SqlSession;
  * @author eduar
  */
 public class SucursalDAO {
+
     public static Mensaje agregarSucursal(Sucursal sucursal) {
         Mensaje msj = new Mensaje();
         msj.setError(true);
@@ -28,7 +29,7 @@ public class SucursalDAO {
             try {
                 int filasAfectadas = sqlSession.insert("sucursal.agregarSucursal", sucursal);
                 sqlSession.commit();
-                
+
                 if (filasAfectadas > 0) {
                     msj.setError(false);
                     msj.setMensaje("Se agregó correctamente la sucursal");
@@ -44,7 +45,8 @@ public class SucursalDAO {
         }
         return msj;
     }
-        public static Mensaje editarSucursal(Sucursal sucursal) {
+
+    public static Mensaje editarSucursal(Sucursal sucursal) {
         Mensaje msj = new Mensaje();
         msj.setError(true);
         SqlSession sqlSession = MyBatisUtil.getSession();
@@ -52,7 +54,7 @@ public class SucursalDAO {
             try {
                 int filasAfectadas = sqlSession.update("sucursal.editarSucursal", sucursal);
                 sqlSession.commit();
-                
+
                 if (filasAfectadas > 0) {
                     msj.setError(false);
                     msj.setMensaje("Se editó correctamente la sucursal");
@@ -68,74 +70,60 @@ public class SucursalDAO {
         }
         return msj;
     }
-    
-   public static Mensaje eliminarSucursal(Integer idSucursal) {
-    Mensaje msj = new Mensaje();
-    msj.setError(true);
-    SqlSession sqlSession = MyBatisUtil.getSession();
 
-    if (sqlSession != null) {
-        try {
-            // Verificar promociones asociadas
-            int promocionesAsociadas = sqlSession.selectOne("sucursal.contarPromocionesAsociadas", idSucursal);
+    public static Mensaje eliminarSucursal(Integer idSucursal) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
 
-            if (promocionesAsociadas == 0) {
-                int filasAfectadas = sqlSession.delete("sucursal.eliminarSucursal", idSucursal);
-                sqlSession.commit();
-
-                if (filasAfectadas > 0) {
-                    msj.setError(false);
-                    msj.setMensaje("Se eliminó correctamente la sucursal");
+        if (sqlSession != null) {
+            try {
+                int promocionesAsociadas = sqlSession.selectOne("sucursal.contarPromocionesAsociadas", idSucursal);
+                if (promocionesAsociadas == 0) {
+                    int filasAfectadas = sqlSession.delete("sucursal.eliminarSucursal", idSucursal);
+                    sqlSession.commit();
+                    if (filasAfectadas > 0) {
+                        msj.setError(false);
+                        msj.setMensaje("Se eliminó correctamente la sucursal");
+                    } else {
+                        msj.setMensaje("No se pudo eliminar la sucursal, intenta nuevamente");
+                    }
                 } else {
-                    msj.setMensaje("No se pudo eliminar la sucursal, intenta nuevamente");
+                    msj.setMensaje("No se puede eliminar la sucursal. \n Tiene promociones asociadas.");
                 }
-            } else {
-                msj.setMensaje("No se puede eliminar la sucursal. Tiene promociones asociadas.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
             }
-
-        } catch (Exception e) {
-            // Manejar errores específicos
-            e.printStackTrace();
-            msj.setMensaje("ERROR: " + e.getMessage());
-        } finally {
-            sqlSession.close();
         }
+        return msj;
     }
 
-    return msj;
-}
-public static List<Sucursal> buscarSucursales(String parametro) {
-    List<Sucursal> sucursales = new ArrayList<>();
-    SqlSession sqlSession = MyBatisUtil.getSession();
-
-    if (sqlSession != null) {
-        try {
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("param", parametro);
-            sucursales = sqlSession.selectList("sucursal.buscarSucursal", parameters);
-        } finally {
-            sqlSession.close();
+    public static Sucursal buscarSucursal(String parametro) {
+        Sucursal sucursal = null;
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                sucursal = sqlSession.selectOne("sucursal.buscarSucursal", parametro);
+            } finally {
+                sqlSession.close();
+            }
         }
+        return sucursal;
     }
-    return sucursales;
-}
-public static Sucursal buscarSucursal(String parametro) {
-    Sucursal sucursal = null;
-    SqlSession sqlSession = MyBatisUtil.getSession();
-    if (sqlSession != null) {
-        try {
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("param", parametro);
-
-            // Modificar la consulta según tus necesidades
-            sucursal = sqlSession.selectOne("sucursal.buscarSucursal", parameters);
-        } finally {
-            sqlSession.close();
+    public static List<Sucursal> buscarSucursales(String parametro) {
+        List<Sucursal> sucursal = null;
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                sucursal = sqlSession.selectList("sucursal.buscarSucursal", parametro);
+            } finally {
+                sqlSession.close();
+            }
         }
+        return sucursal;
     }
-    return sucursal;
-}
-
-
 
 }

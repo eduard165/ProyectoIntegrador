@@ -9,32 +9,29 @@ package modelo.pojo;
  *
  * @author eduar
  */
-public class Sucursal{
+public class Sucursal {
+
     private Integer idSucursal;
     private String nombre;
-    private String codigoPostal;
-    private String colonia;
     private String telefono;
     private double latitud;
     private double longitud;
     private String nombreEncargado;
-    private Integer empresa;
-    private Integer direccion;
+    private String empresaRFC;
+    private Integer direccionID;
 
     public Sucursal() {
     }
 
-    public Sucursal(Integer idSucursal, String nombre, String codigoPostal, String colonia, String telefono, double latitud, double longitud, String nombreEncargado, Integer empresa, Integer direccion) {
+    public Sucursal(Integer idSucursal, String nombre, String telefono, double latitud, double longitud, String nombreEncargado, String empresaRFC, Integer direccionID) {
         this.idSucursal = idSucursal;
         this.nombre = nombre;
-        this.codigoPostal = codigoPostal;
-        this.colonia = colonia;
         this.telefono = telefono;
         this.latitud = latitud;
         this.longitud = longitud;
         this.nombreEncargado = nombreEncargado;
-        this.empresa = empresa;
-        this.direccion = direccion;
+        this.empresaRFC = empresaRFC;
+        this.direccionID = direccionID;
     }
 
     public Integer getIdSucursal() {
@@ -51,22 +48,6 @@ public class Sucursal{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCodigoPostal() {
-        return codigoPostal;
-    }
-
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
-
-    public String getColonia() {
-        return colonia;
-    }
-
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
     }
 
     public String getTelefono() {
@@ -101,29 +82,21 @@ public class Sucursal{
         this.nombreEncargado = nombreEncargado;
     }
 
-    public Integer getEmpresa() {
-        return empresa;
+    public String getEmpresaRFC() {
+        return empresaRFC;
     }
 
-    public void setEmpresa(Integer empresa) {
-        this.empresa = empresa;
+    public void setEmpresaRFC(String empresaRFC) {
+        this.empresaRFC = empresaRFC;
     }
 
-    public Integer getDireccion() {
-        return direccion;
+    public Integer getDireccionID() {
+        return direccionID;
     }
 
-    public void setDireccion(Integer direccion) {
-        this.direccion = direccion;
+    public void setDireccionID(Integer direccionID) {
+        this.direccionID = direccionID;
     }
-public boolean todosAtributosLlenos() {
-        return 
-               nombre != null &&
-               codigoPostal != null &&
-               colonia != null &&
-               telefono != null &&
-               nombreEncargado != null &&
-               empresa != null &&
-               direccion != null;
-    }
+
+ 
 }
