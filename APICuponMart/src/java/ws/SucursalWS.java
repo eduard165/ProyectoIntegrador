@@ -32,12 +32,7 @@ public class SucursalWS {
     public Mensaje registrarSucursal(String json) {
         Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-        if (sucursal == null
-                && sucursal.getEmpresaRFC() == null
-                && sucursal.getDireccionID() < 0
-                && sucursal.getNombre() == null
-                && sucursal.getTelefono() == null
-                && sucursal.getNombreEncargado() == null) {
+        if (sucursal == null && sucursal.validarDatos()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.agregarSucursal(sucursal);
@@ -50,13 +45,7 @@ public class SucursalWS {
     public Mensaje editarSucursal(String json) {
         Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-        if (sucursal == null
-                && sucursal.getIdSucursal() < 0
-                && sucursal.getEmpresaRFC() == null
-                && sucursal.getDireccionID() < 0
-                && sucursal.getNombre() == null
-                && sucursal.getTelefono() == null
-                && sucursal.getNombreEncargado() == null ) {
+        if (sucursal == null && sucursal.validarDatos() ) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.editarSucursal(sucursal);

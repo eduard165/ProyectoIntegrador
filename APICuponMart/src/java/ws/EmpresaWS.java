@@ -23,10 +23,7 @@ import modelo.EmpresaDAO;
 import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
 
-/**
- *
- * @author eduar
- */
+// agregar subir y descargar logo
 @Path("empresas")
 public class EmpresaWS {
 
@@ -42,7 +39,7 @@ public class EmpresaWS {
     public Mensaje agregarEmpresa(String json) {
         Gson gsons = new Gson();
         Empresa empresa = gsons.fromJson(json, Empresa.class);
-        if (!validarCamposObligatorios(empresa) || !validarFormatoCorreo(empresa.getEmail())) {
+        if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return  EmpresaDAO.agregarEmpresa(empresa);
@@ -57,7 +54,7 @@ public class EmpresaWS {
     public Mensaje editarEmpresa(String json) {
         Gson gsons = new Gson();
         Empresa empresa = gson.fromJson(json, Empresa.class);
-        if (!validarCamposObligatorios(empresa) || !validarFormatoCorreo(empresa.getEmail())) {
+        if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return EmpresaDAO.editarEmpresa(empresa);
@@ -95,20 +92,5 @@ public Mensaje eliminarEmpresa(@PathParam("RFC") String RFC) {
         }
       return  EmpresaDAO.buscarEmpresas(parametro);
     }
-
-
-    private boolean validarCamposObligatorios(Empresa empresa) {
-        return empresa.getNombre() != null
-                && empresa.getRFC() != null
-                && empresa.getEmail() != null
-                && empresa.getDireccionID() != null;
-        
-    }
-
-    private boolean validarFormatoCorreo(String correo) {
-    String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
-    return correo != null && correo.matches(regex);
-    }
-
 
 }

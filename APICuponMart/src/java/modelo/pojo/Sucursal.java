@@ -98,5 +98,8 @@ public class Sucursal {
         this.direccionID = direccionID;
     }
 
+ public Boolean validarDatos(){
+     return  this.empresaRFC == null && this.direccionID < 0 && this.nombre == null && this.telefono == null && this.nombreEncargado == null;
  
+    }
 }

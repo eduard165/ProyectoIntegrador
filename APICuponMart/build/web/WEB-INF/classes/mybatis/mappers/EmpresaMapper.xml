@@ -35,5 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT COUNT(*) FROM Sucursal
         WHERE empresaRFC = #{RFC}
     </select>
+     <update id = "subirLogo" parameterType="modelo.pojo.Paciente">
+        UPDATE empresa
+        SET logo = #{logo} 
+        WHERE RFC = #{RFC}
+    </update>
+    <select id="obtenerLogo" parameterType="int" resultType="modelo.pojo.Paciente">
+        SELECT RFC,nombre, nombreComercial, representanteLegal, email, TO_BASE64(LOGO) AS 'logoBase64'
+        FROM empresa WHERE RFC = #{RFC}
+    </select>
 
 </mapper>

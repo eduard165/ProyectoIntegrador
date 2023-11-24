@@ -136,4 +136,47 @@ public static List<Promocion> buscarPromociones(String parametro) {
 }
 
 
+    public static Mensaje subirImagenPromocion(int idPaciente, byte[] foto){
+        Mensaje rest = new Mensaje();
+        rest.setError(true);
+        SqlSession conexionBD = MyBatisUtil.getSession();
+        if (conexionBD != null){
+            try {
+                Promocion promocionFoto = new Promocion();
+                promocionFoto.setIdPromocion(idPaciente);
+                promocionFoto.setImagen(foto);
+                int filasAfectadas = conexionBD.update("empresa.subirImagen", promocionFoto);
+                conexionBD.commit();
+                if(filasAfectadas > 0 ){
+                    rest.setError(false);
+                    rest.setMensaje("La imagen de la promocion a sido guardada correctamente");
+                }else{
+                    rest.setMensaje("Hubo un error al guardar la imagen de la promocion, revise su imagen");
+                }
+            } catch (Exception e) {
+                rest.setMensaje("Error: " + e.getMessage());
+            }finally{
+                conexionBD.close();
+            }
+        }else
+        {
+                rest.setMensaje("Lo sentimos no hay conexion para guardar la imgen de la promocion");
+        }
+        return rest;
+    }
+    public static Promocion obtenerImagenPromocion(int idPromocion){
+        Promocion promocion = null;
+        SqlSession conexionBD= MyBatisUtil.getSession();
+        if(conexionBD != null){
+            try {
+                promocion = conexionBD.selectOne("empresa.obtenerimagen", idPromocion);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally{
+                conexionBD.close();
+            }
+        }
+        return promocion;
+    }
+
 }

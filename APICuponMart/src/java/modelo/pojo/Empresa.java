@@ -10,31 +10,34 @@ package modelo.pojo;
  * @author eduar
  */
 public class Empresa {
-   private String RFC;
+
+    private String RFC;
     private String nombre;
     private String nombreComercial;
-    private String logo;
     private String representanteLegal;
     private String email;
     private String telefono;
     private String paginaWeb;
     private String estatusID;
-    private Integer direccionID; 
+    private Integer direccionID;
+    private byte[] logo;
+    private String logoBase64;
 
     public Empresa() {
     }
 
-    public Empresa(String RFC, String nombre, String nombreComercial, String logo, String representanteLegal, String email, String telefono, String paginaWeb, String estatusID, Integer direccionID) {
+    public Empresa(String RFC, String nombre, String nombreComercial, String representanteLegal, String email, String telefono, String paginaWeb, String estatusID, Integer direccionID, byte[] logo, String logoBase64) {
         this.RFC = RFC;
         this.nombre = nombre;
         this.nombreComercial = nombreComercial;
-        this.logo = logo;
         this.representanteLegal = representanteLegal;
         this.email = email;
         this.telefono = telefono;
         this.paginaWeb = paginaWeb;
         this.estatusID = estatusID;
         this.direccionID = direccionID;
+        this.logo = logo;
+        this.logoBase64 = logoBase64;
     }
 
     public String getRFC() {
@@ -59,14 +62,6 @@ public class Empresa {
 
     public void setNombreComercial(String nombreComercial) {
         this.nombreComercial = nombreComercial;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public String getRepresentanteLegal() {
@@ -105,17 +100,40 @@ public class Empresa {
         return estatusID;
     }
 
-    public void setEstatusID(String estatus) {
-        this.estatusID = estatus;
+    public void setEstatusID(String estatusID) {
+        this.estatusID = estatusID;
     }
 
     public Integer getDireccionID() {
         return direccionID;
     }
 
-    public void setDireccionID(Integer direccion) {
-        this.direccionID = direccion;
+    public void setDireccionID(Integer direccionID) {
+        this.direccionID = direccionID;
     }
-    
-    
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getLogoBase64() {
+        return logoBase64;
+    }
+
+    public void setLogoBase64(String logoBase64) {
+        this.logoBase64 = logoBase64;
+    }
+public boolean validarCamposObligatorios() {
+     return this.nombre.isEmpty() && this.RFC.isEmpty() && this.email.isEmpty() && this.direccionID < 0 ;
+        
+    }
+
+  public boolean validarFormatoCorreo() {
+        return this.email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$");
+    }
+
 }

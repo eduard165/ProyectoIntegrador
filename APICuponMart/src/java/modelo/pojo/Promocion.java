@@ -17,7 +17,8 @@ public class Promocion {
     private Integer idPromocion;
     private String nombrePromocion;
     private String descripcion;
-    private String imagen;
+    private byte[] imagen;
+    private String imagenBase64;
     private String fechaInicio;
     private String fechaTermino;
     private String restricciones;
@@ -30,11 +31,12 @@ public class Promocion {
     public Promocion() {
     }
 
-    public Promocion(Integer idPromocion, String nombrePromocion, String descripcion, String imagen, String fechaInicio, String fechaTermino, String restricciones, Integer tipoPromocionID, BigDecimal porcentajeDescuento, String codigoPromocion, String empresaRFC, Integer estatusID) {
+    public Promocion(Integer idPromocion, String nombrePromocion, String descripcion, byte[] imagen, String imagenBase64, String fechaInicio, String fechaTermino, String restricciones, Integer tipoPromocionID, BigDecimal porcentajeDescuento, String codigoPromocion, String empresaRFC, Integer estatusID) {
         this.idPromocion = idPromocion;
         this.nombrePromocion = nombrePromocion;
         this.descripcion = descripcion;
         this.imagen = imagen;
+        this.imagenBase64 = imagenBase64;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
         this.restricciones = restricciones;
@@ -69,12 +71,20 @@ public class Promocion {
         this.descripcion = descripcion;
     }
 
-    public String getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public String getImagenBase64() {
+        return imagenBase64;
+    }
+
+    public void setImagenBase64(String imagenBase64) {
+        this.imagenBase64 = imagenBase64;
     }
 
     public String getFechaInicio() {
@@ -141,11 +151,9 @@ public class Promocion {
         this.estatusID = estatusID;
     }
 
-
     public boolean todosAtributosLlenos() {
         return nombrePromocion != null
                 && descripcion != null
-                && imagen != null
                 && fechaInicio != null
                 && fechaTermino != null
                 && restricciones != null

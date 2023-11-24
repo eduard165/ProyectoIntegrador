@@ -1,15 +1,15 @@
 package modelo.pojo;
 
-public class RespuestaLoginEscritorio {
+public class RespuestaLoginUsuario {
     
     private boolean error;
     private String contenido;
     private Usuario usuario ;
 
-    public RespuestaLoginEscritorio() {
+    public RespuestaLoginUsuario() {
     }
 
-    public RespuestaLoginEscritorio(boolean error, String contenido, Usuario usuario) {
+    public RespuestaLoginUsuario(boolean error, String contenido, Usuario usuario) {
         this.error = error;
         this.contenido = contenido;
         this.usuario = usuario;
