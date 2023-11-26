@@ -136,16 +136,16 @@ public static List<Promocion> buscarPromociones(String parametro) {
 }
 
 
-    public static Mensaje subirImagenPromocion(int idPaciente, byte[] foto){
+    public static Mensaje subirImagenPorId(int idPromocion, byte[] foto){
         Mensaje rest = new Mensaje();
         rest.setError(true);
         SqlSession conexionBD = MyBatisUtil.getSession();
         if (conexionBD != null){
             try {
                 Promocion promocionFoto = new Promocion();
-                promocionFoto.setIdPromocion(idPaciente);
+                promocionFoto.setIdPromocion(idPromocion);
                 promocionFoto.setImagen(foto);
-                int filasAfectadas = conexionBD.update("empresa.subirImagen", promocionFoto);
+                int filasAfectadas = conexionBD.update("promocion.subirImagen", promocionFoto);
                 conexionBD.commit();
                 if(filasAfectadas > 0 ){
                     rest.setError(false);
@@ -164,12 +164,12 @@ public static List<Promocion> buscarPromociones(String parametro) {
         }
         return rest;
     }
-    public static Promocion obtenerImagenPromocion(int idPromocion){
+    public static Promocion obtenerImagenPorId(int idPromocion){
         Promocion promocion = null;
         SqlSession conexionBD= MyBatisUtil.getSession();
         if(conexionBD != null){
             try {
-                promocion = conexionBD.selectOne("empresa.obtenerimagen", idPromocion);
+                promocion = conexionBD.selectOne("promocion.obtenerimagen", idPromocion);
             } catch (Exception e) {
                 e.printStackTrace();
             }finally{

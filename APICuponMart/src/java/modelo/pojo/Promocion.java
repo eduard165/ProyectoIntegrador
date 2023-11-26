@@ -22,16 +22,17 @@ public class Promocion {
     private String fechaInicio;
     private String fechaTermino;
     private String restricciones;
-    private Integer tipoPromocionID;
+    private Integer idTipoPromocion;
     private BigDecimal porcentajeDescuento;
     private String codigoPromocion;
     private String empresaRFC;
-    private Integer estatusID;
+    private Integer idCategoria;
+    private Integer idEstatus;
 
     public Promocion() {
     }
 
-    public Promocion(Integer idPromocion, String nombrePromocion, String descripcion, byte[] imagen, String imagenBase64, String fechaInicio, String fechaTermino, String restricciones, Integer tipoPromocionID, BigDecimal porcentajeDescuento, String codigoPromocion, String empresaRFC, Integer estatusID) {
+    public Promocion(Integer idPromocion, String nombrePromocion, String descripcion, byte[] imagen, String imagenBase64, String fechaInicio, String fechaTermino, String restricciones, Integer idTipoPromocion, BigDecimal porcentajeDescuento, String codigoPromocion, String empresaRFC, Integer idCategoria, Integer idEstatus) {
         this.idPromocion = idPromocion;
         this.nombrePromocion = nombrePromocion;
         this.descripcion = descripcion;
@@ -40,11 +41,12 @@ public class Promocion {
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
         this.restricciones = restricciones;
-        this.tipoPromocionID = tipoPromocionID;
+        this.idTipoPromocion = idTipoPromocion;
         this.porcentajeDescuento = porcentajeDescuento;
         this.codigoPromocion = codigoPromocion;
         this.empresaRFC = empresaRFC;
-        this.estatusID = estatusID;
+        this.idCategoria = idCategoria;
+        this.idEstatus = idEstatus;
     }
 
     public Integer getIdPromocion() {
@@ -111,12 +113,12 @@ public class Promocion {
         this.restricciones = restricciones;
     }
 
-    public Integer getTipoPromocionID() {
-        return tipoPromocionID;
+    public Integer getIdTipoPromocion() {
+        return idTipoPromocion;
     }
 
-    public void setTipoPromocionID(Integer tipoPromocionID) {
-        this.tipoPromocionID = tipoPromocionID;
+    public void setIdTipoPromocion(Integer idTipoPromocion) {
+        this.idTipoPromocion = idTipoPromocion;
     }
 
     public BigDecimal getPorcentajeDescuento() {
@@ -143,13 +145,22 @@ public class Promocion {
         this.empresaRFC = empresaRFC;
     }
 
-    public Integer getEstatusID() {
-        return estatusID;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setEstatusID(Integer estatusID) {
-        this.estatusID = estatusID;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
+
+    public Integer getIdEstatus() {
+        return idEstatus;
+    }
+
+    public void setIdEstatus(Integer idEstatus) {
+        this.idEstatus = idEstatus;
+    }
+
 
     public boolean todosAtributosLlenos() {
         return nombrePromocion != null
@@ -157,11 +168,11 @@ public class Promocion {
                 && fechaInicio != null
                 && fechaTermino != null
                 && restricciones != null
-                && tipoPromocionID != null
+                && idTipoPromocion != null
                 && porcentajeDescuento != null
                 && codigoPromocion != null
                 && empresaRFC != null
-                && estatusID != null;
+                && idEstatus != null;
     }
 
 }

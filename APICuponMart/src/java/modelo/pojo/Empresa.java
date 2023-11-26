@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.pojo;
 
-/**
- *
- * @author eduar
- */
 public class Empresa {
 
     private String RFC;
@@ -19,14 +11,13 @@ public class Empresa {
     private String telefono;
     private String paginaWeb;
     private String estatusID;
-    private Integer direccionID;
     private byte[] logo;
     private String logoBase64;
 
     public Empresa() {
     }
 
-    public Empresa(String RFC, String nombre, String nombreComercial, String representanteLegal, String email, String telefono, String paginaWeb, String estatusID, Integer direccionID, byte[] logo, String logoBase64) {
+    public Empresa(String RFC, String nombre, String nombreComercial, String representanteLegal, String email, String telefono, String paginaWeb, String estatusID, byte[] logo, String logoBase64) {
         this.RFC = RFC;
         this.nombre = nombre;
         this.nombreComercial = nombreComercial;
@@ -35,7 +26,6 @@ public class Empresa {
         this.telefono = telefono;
         this.paginaWeb = paginaWeb;
         this.estatusID = estatusID;
-        this.direccionID = direccionID;
         this.logo = logo;
         this.logoBase64 = logoBase64;
     }
@@ -104,14 +94,6 @@ public class Empresa {
         this.estatusID = estatusID;
     }
 
-    public Integer getDireccionID() {
-        return direccionID;
-    }
-
-    public void setDireccionID(Integer direccionID) {
-        this.direccionID = direccionID;
-    }
-
     public byte[] getLogo() {
         return logo;
     }
@@ -127,12 +109,13 @@ public class Empresa {
     public void setLogoBase64(String logoBase64) {
         this.logoBase64 = logoBase64;
     }
-public boolean validarCamposObligatorios() {
-     return this.nombre.isEmpty() && this.RFC.isEmpty() && this.email.isEmpty() && this.direccionID < 0 ;
-        
+
+    public boolean validarCamposObligatorios() {
+        return this.nombre.isEmpty() && this.RFC.isEmpty() && this.email.isEmpty();
+
     }
 
-  public boolean validarFormatoCorreo() {
+    public boolean validarFormatoCorreo() {
         return this.email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$");
     }
 

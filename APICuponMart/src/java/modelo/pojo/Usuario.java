@@ -9,9 +9,9 @@ public class Usuario {
     private String CURP;
     private String correoElectronico;
     private String username;
-    private String password; // Ajusta el nombre del atributo según tu script de base de datos
+    private String password;
     private Integer rolID;
-    private String empresaRFC; // Puede ser nulo si el usuario no es Administrador Comercial
+    private String empresaRFC; 
 
     public Usuario() {
     }
@@ -110,13 +110,12 @@ public class Usuario {
     }
 
     public String obtenerTipoUsuario() {
-        if (this.getRolID() != null) {
-            switch (this.getRolID()) {
+        if (this.rolID != null) {
+            switch (this.rolID) {
                 case 1:
                     return "Administrador general";
                 case 2:
                     return "Administrador comercial";
-                // Agrega más casos según sea necesario para otros roles
                 default:
                     return "Rol no especificado";
             }

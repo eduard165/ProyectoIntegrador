@@ -19,32 +19,26 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import modelo.EmpresaDAO;
-
 import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
 
-// agregar subir y descargar logo
 @Path("empresas")
 public class EmpresaWS {
 
-    private Gson gson = new Gson();
-
     public EmpresaWS() {
     }
-
+    
     @Path("/agregarEmpresa")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Mensaje agregarEmpresa(String json) {
-        Gson gsons = new Gson();
-        Empresa empresa = gsons.fromJson(json, Empresa.class);
+        Gson gson = new Gson();
+        Empresa empresa = gson.fromJson(json, Empresa.class);
         if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        return  EmpresaDAO.agregarEmpresa(empresa);
-
-       
+        return EmpresaDAO.agregarEmpresa(empresa);
     }
 
     @Path("/editarEmpresa")
@@ -52,26 +46,24 @@ public class EmpresaWS {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Mensaje editarEmpresa(String json) {
-        Gson gsons = new Gson();
+        Gson gson = new Gson();
         Empresa empresa = gson.fromJson(json, Empresa.class);
         if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return EmpresaDAO.editarEmpresa(empresa);
-
     }
 
-@Path("/eliminarEmpresa/{RFC}")
-@DELETE
-@Produces(MediaType.APPLICATION_JSON)
-public Mensaje eliminarEmpresa(@PathParam("RFC") String RFC) {
-    if (RFC != null && !RFC.isEmpty()) {
-         return EmpresaDAO.eliminarEmpresa(RFC);
-    } else {
-        return new Mensaje(true, "El RFC no puede estar vacío");
+    @Path("/eliminarEmpresa/{empresaRFC}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje eliminarEmpresa(@PathParam("empresaRFC") String empresaRFC) {
+        if (empresaRFC != null && !empresaRFC.isEmpty()) {
+            return EmpresaDAO.eliminarEmpresa(empresaRFC);
+        } else {
+            return new Mensaje(true, "El RFC no puede estar vacío");
+        }
     }
-}
-
 
     @Path("/buscarEmpresa/{parametro}")
     @GET
@@ -80,9 +72,9 @@ public Mensaje eliminarEmpresa(@PathParam("RFC") String RFC) {
         if (parametro == null || parametro.trim().isEmpty()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-      return  EmpresaDAO.buscarEmpresa(parametro);
+        return EmpresaDAO.buscarEmpresa(parametro);
     }
-    
+
     @Path("/buscarEmpresas/{parametro}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,7 +82,26 @@ public Mensaje eliminarEmpresa(@PathParam("RFC") String RFC) {
         if (parametro == null || parametro.trim().isEmpty()) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-      return  EmpresaDAO.buscarEmpresas(parametro);
+        return EmpresaDAO.buscarEmpresas(parametro);
     }
 
+    @PUT
+    @Path("registrarLogo/{empresaRFC}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje registrarFotografia(@PathParam("empresaRFC") String empresaRFC,byte[] foto) {
+        if (empresaRFC == null && empresaRFC.isEmpty() && foto == null) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return EmpresaDAO.subirLogoPorId(empresaRFC, foto);
+    }
+
+    @GET
+    @Path("obtenerLogo/{empresaRFC}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Empresa ObtenerFotografia(@PathParam("empresaRFC") String empresaRFC) {
+        if (empresaRFC == null && empresaRFC.isEmpty()) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return EmpresaDAO.obtenerLogo(empresaRFC);
+    }
 }

@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sucursal">
-   
     <insert id="agregarSucursal" parameterType="modelo.pojo.Sucursal">
         INSERT INTO Sucursal (nombre, telefono, latitud, longitud, nombreEncargado, empresaRFC, direccionID)
         VALUES (#{nombre}, #{telefono}, #{latitud}, #{longitud}, #{nombreEncargado}, #{empresaRFC}, #{direccionID})
@@ -32,11 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         OR d.colonia LIKE #{param}
         OR d.ciudad LIKE #{param}
 </select>
-
     <select id="contarPromocionesAsociadas" resultType="int" parameterType="int">
         SELECT COUNT(*) FROM Sucursal_Promocion
         WHERE sucursalID = #{idSucursal}
     </select>
-
-
 </mapper>
