@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="882.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clienteescritoriocuponsmart.FXMLInicioSesionController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritoriocuponsmart.FXMLInicioSesionController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="631.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="425.0">
@@ -33,19 +33,19 @@
             <Font name="Leelawadee UI Semilight" size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="545.0" layoutY="233.0" promptText="Usuario">
+      <TextField fx:id="tfUsuario" layoutX="545.0" layoutY="233.0" promptText="Usuario">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
       <Label layoutX="557.0" layoutY="234.0" textFill="#dd1010" />
       <Label layoutX="556.0" layoutY="315.0" textFill="#dd1010" />
-      <Button layoutX="589.0" layoutY="375.0" mnemonicParsing="false" text="Iniciar sesión">
+      <Button layoutX="589.0" layoutY="375.0" mnemonicParsing="false" onAction="#btnInicioSesion" text="Iniciar sesión">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
-      <PasswordField layoutX="545.0" layoutY="299.0" promptText="Contraseña">
+      <PasswordField fx:id="tfPassword" layoutX="545.0" layoutY="299.0" promptText="Contraseña">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
