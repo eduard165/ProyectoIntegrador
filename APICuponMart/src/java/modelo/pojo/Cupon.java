@@ -1,32 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo.pojo;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author eduar
- */
 public class Cupon {
     private Integer idCupon;
     private String codigoCupon;
-    private Integer promocionID;
+    private Integer idPromocion;
      private LocalDate fechaGeneracion;
-     private Integer estausID;
+     private Integer idEstaus;
 
     public Cupon() {
     }
 
-    public Cupon(Integer idCupon, String codigoCupon, Integer promocionID, LocalDate fechaGeneracion, Integer estausID) {
+    public Cupon(Integer idCupon, String codigoCupon, Integer idPromocion, LocalDate fechaGeneracion, Integer idEstaus) {
         this.idCupon = idCupon;
         this.codigoCupon = codigoCupon;
-        this.promocionID = promocionID;
+        this.idPromocion = idPromocion;
         this.fechaGeneracion = fechaGeneracion;
-        this.estausID = estausID;
+        this.idEstaus = idEstaus;
     }
 
     public Integer getIdCupon() {
@@ -45,12 +37,12 @@ public class Cupon {
         this.codigoCupon = codigoCupon;
     }
 
-    public Integer getPromocionID() {
-        return promocionID;
+    public Integer getIdPromocion() {
+        return idPromocion;
     }
 
-    public void setPromocionID(Integer promocionID) {
-        this.promocionID = promocionID;
+    public void setIdPromocion(Integer idPromocion) {
+        this.idPromocion = idPromocion;
     }
 
     public LocalDate getFechaGeneracion() {
@@ -61,12 +53,12 @@ public class Cupon {
         this.fechaGeneracion = fechaGeneracion;
     }
 
-    public Integer getEstausID() {
-        return estausID;
+    public Integer getIdEstaus() {
+        return idEstaus;
     }
 
-    public void setEstausID(Integer estausID) {
-        this.estausID = estausID;
+    public void setIdEstaus(Integer idEstaus) {
+        this.idEstaus = idEstaus;
     }
-     
+
 }

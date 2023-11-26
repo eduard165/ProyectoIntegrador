@@ -19,8 +19,10 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import modelo.CuponDAO;
+import modelo.EmpresaDAO;
 import modelo.PromocionDAO;
 import modelo.pojo.Cupon;
+import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Promocion;
 
@@ -87,7 +89,31 @@ public class GestionOfertasWS {
        } 
        return PromocionDAO.eliminarPromocion(idPromocion);
     }
+    
+     @PUT
+    @Path("registrarFoto/{idPromocion}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensaje registrarFotografia(@PathParam("idPromocion") Integer idPromocion,byte[] foto) {
+        if (idPromocion == null && idPromocion <= 0 && foto == null) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return PromocionDAO.subirImagenPorId(idPromocion, foto);
+    }
+
+    @GET
+    @Path("obtenerFoto/{idPromocion}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Promocion ObtenerFotografia(@PathParam("idPromocion") Integer idPromocion) {
+        if (idPromocion == null && idPromocion<=0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+        return PromocionDAO.obtenerImagenPorId(idPromocion);
+    }
+    
+    
 //////////////////////* CUPONES*//////////////////////////////////////////////
+    
+    
     @GET
     @Path("/cuponesDisponibles")
     @Produces(MediaType.APPLICATION_JSON)

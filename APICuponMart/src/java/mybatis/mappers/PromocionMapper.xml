@@ -22,7 +22,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         empresaRFC = #{empresaRFC}
         WHERE idPromocion = #{idPromocion}
     </update>
-
     <delete id="eliminarPromocion" parameterType="Integer">
         DELETE FROM Promocion
         WHERE idPromocion = #{idPromocion}
@@ -36,14 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="cambiarEstadoPromocion" parameterType="map">
         UPDATE Promocion SET estatusID = #{nuevoEstatusID} WHERE idPromocion = #{idPromocion}
     </update>   
-    
-    <update id = "subirImagen" parameterType="modelo.pojo.Promocion">
+    <update id="subirImagen" parameterType="modelo.pojo.Promocion">
         UPDATE promocion
         SET imagen = #{imagen} 
-        WHERE RFC = #{RFC}
+        WHERE idPromocion = #{idPromocion}
     </update>
     <select id="obtenerImagen" parameterType="int" resultType="modelo.pojo.Promocion">
-        SELECT RFC,nombre, nombreComercial, representanteLegal, email, TO_BASE64(LOGO) AS 'logoBase64'
-        FROM empresa WHERE RFC = #{RFC}
+        SELECT TO_BASE64(imagen) AS 'imagenBase64'
+        FROM promocion
+        WHERE idPromocion = #{idPromocion}
     </select>
+
 </mapper>

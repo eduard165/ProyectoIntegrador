@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.util.ArrayList;
@@ -12,16 +8,11 @@ import modelo.pojo.Mensaje;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
-/**
- *
- * @author eduar
- */
 public class CuponDAO {
     
     public static List<Cupon> listarCuponesDisponibles() {
     List<Cupon> cupones = new ArrayList<>();
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
             cupones = sqlSession.selectList("cupon.listarCuponesDisponibles");
@@ -35,10 +26,8 @@ public class CuponDAO {
     Mensaje msj = new Mensaje();
     msj.setError(true);
     SqlSession sqlSession = MyBatisUtil.getSession();
-
     if (sqlSession != null) {
         try {
-            // Verificar si hay cupones disponibles para canjear
             int cuponesDisponibles = sqlSession.selectOne("cupon.obtenerCuponesDisponibles", codigoCupon);
 
             if (cuponesDisponibles > 0) {

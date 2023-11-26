@@ -1,24 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo.pojo;
 
-/**
- *
- * @author eduar
- */
 public class Cliente {
-  private Integer  idCliente ;
-private String nombre;
-private String apellidoPaterno ;
-private String apellidoMaterno ;
-private String telefono ;
-private String correoElectronico;
-private Integer direccionID ;
-private String fechaNacimiento ;
-private String password;
+
+    private Integer idCliente;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String telefono;
+    private String correoElectronico;
+    private Integer direccionID;
+    private String fechaNacimiento;
+    private String password;
 
     public Cliente() {
     }
@@ -106,10 +98,12 @@ private String password;
     public void setPassword(String password) {
         this.password = password;
     }
- public Boolean todosAtributosLlenos(){
+
+    public Boolean todosAtributosLlenos() {
         return siEsUncorreoValido() && this.password.isEmpty();
     }
- public Boolean siEsUncorreoValido(){
-     return this.correoElectronico.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$");
- }
+
+    public Boolean siEsUncorreoValido() {
+        return this.correoElectronico.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$");
+    }
 }
