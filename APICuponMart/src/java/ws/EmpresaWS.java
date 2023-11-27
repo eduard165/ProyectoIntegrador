@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 import modelo.EmpresaDAO;
 import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
+import utilidades.Validaciones;
 
 @Path("empresas")
 public class EmpresaWS {
@@ -35,7 +36,7 @@ public class EmpresaWS {
     public Mensaje agregarEmpresa(String json) {
         Gson gson = new Gson();
         Empresa empresa = gson.fromJson(json, Empresa.class);
-        if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
+        if (Validaciones.validarEmpresa(empresa) ) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return EmpresaDAO.agregarEmpresa(empresa);

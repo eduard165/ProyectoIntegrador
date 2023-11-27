@@ -110,13 +110,5 @@ public class Empresa {
         this.logoBase64 = logoBase64;
     }
 
-    public boolean validarCamposObligatorios() {
-        return this.nombre.isEmpty() && this.RFC.isEmpty() && this.email.isEmpty();
-
-    }
-
-    public boolean validarFormatoCorreo() {
-        return this.email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$");
-    }
-
+   
 }

@@ -2,17 +2,25 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/EmpresaWS.java</file>
-            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/CuponDAO.java</file>
-            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/mybatis/mappers/DireccionMapper.xml</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/PromocionDAO.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/SucursalWS.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/DireccionWS.java</file>
             <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/EmpresaDAO.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/pojo/Empresa.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/ApplicationConfig.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/pojo/Direccion.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/DireccionDAO.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/EmpresaWS.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/pojo/RespuestaLoginCliente.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/GestionOfertasWS.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/pojo/RespuestaLoginUsuario.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/mybatis/mappers/DireccionMapper.xml</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/utilidades/Validaciones.java</file>
             <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/AutenticacionDAO.java</file>
-            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/modelo/DomicilioDAO.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/ws/AutenticacionWS.java</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/mybatis/mappers/CategoriaMapper.xml</file>
+            <file>file:/D:/Documentos/GitHub/ProyectoIntegrador/APICuponMart/src/java/mybatis/mybatis-config.xml</file>
         </group>
->>>>>>> e07e9a8c78279b54564b0765c6a25a568a3b3064
     </open-files>
 </project-private>
