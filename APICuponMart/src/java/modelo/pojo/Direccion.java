@@ -6,26 +6,24 @@ public class Direccion {
     private String calle;
     private Integer numero;
     private String codigoPostal;
-    private String ciudad;
     private String colonia;
     private Integer idMunicipio;
     private Integer idCliente;
-    private Integer idSucursa;
+    private Integer idSucursal;
     private String empresaRFC;
 
     public Direccion() {
     }
 
-    public Direccion(Integer idDireccion, String calle, Integer numero, String codigoPostal, String ciudad, String colonia, Integer idMunicipio, Integer idCliente, Integer idSucursa, String empresaRFC) {
+    public Direccion(Integer idDireccion, String calle, Integer numero, String codigoPostal, String colonia, Integer idMunicipio, Integer idCliente, Integer idSucursal, String empresaRFC) {
         this.idDireccion = idDireccion;
         this.calle = calle;
         this.numero = numero;
         this.codigoPostal = codigoPostal;
-        this.ciudad = ciudad;
         this.colonia = colonia;
         this.idMunicipio = idMunicipio;
         this.idCliente = idCliente;
-        this.idSucursa = idSucursa;
+        this.idSucursal = idSucursal;
         this.empresaRFC = empresaRFC;
     }
 
@@ -61,14 +59,6 @@ public class Direccion {
         this.codigoPostal = codigoPostal;
     }
 
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
     public String getColonia() {
         return colonia;
     }
@@ -93,12 +83,12 @@ public class Direccion {
         this.idCliente = idCliente;
     }
 
-    public Integer getIdSucursa() {
-        return idSucursa;
+    public Integer getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setIdSucursa(Integer idSucursa) {
-        this.idSucursa = idSucursa;
+    public void setIdSucursal(Integer idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public String getEmpresaRFC() {
@@ -110,23 +100,5 @@ public class Direccion {
     }
     
 
-    public Boolean validarCamposObligatorios() {
-        return this.calle == null
-                && this.ciudad == null
-                && this.codigoPostal == null
-                && this.colonia == null
-                && this.idMunicipio == null
-                && this.numero == null;
-    }
-    public Integer campoLleno() {
-        if (empresaRFC != null) {
-            return 1;
-        } else if (idCliente != null) {
-            return 2;
-        } else if (idSucursa != null) {
-            return 3;
-        } else {
-            return 4;
-        }
-    }
+   
 }

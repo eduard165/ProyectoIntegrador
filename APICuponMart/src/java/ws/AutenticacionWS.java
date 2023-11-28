@@ -7,7 +7,6 @@ package ws;
 
 import com.google.gson.Gson;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,9 +14,11 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import modelo.AutenticacionDAO;
+import modelo.pojo.Cliente;
 import modelo.pojo.RespuestaLoginCliente;
 import modelo.pojo.RespuestaLoginUsuario;
 import modelo.pojo.Usuario;
+import utilidades.Validaciones;
 
 /**
  *
@@ -33,10 +34,10 @@ public class AutenticacionWS {
     public RespuestaLoginUsuario verificarUsuario(String json) {
         Gson gson = new Gson();
         Usuario usuario = gson.fromJson(json, Usuario.class);
-       if(usuario.todosAtributosLlenos()){
+       if(Validaciones.ValidarInisioSesion(usuario)){
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
        }
-         return  AutenticacionDAO.verificarSesionUsuario(json);
+         return  AutenticacionDAO.verificarSesionUsuario(usuario);
     }
     
     @POST
@@ -45,10 +46,10 @@ public class AutenticacionWS {
     @Produces(MediaType.APPLICATION_JSON)
     public RespuestaLoginCliente verificarCliente(String json) {
         Gson gson = new Gson();
-        Usuario usuario = gson.fromJson(json, Usuario.class);
-       if(usuario.todosAtributosLlenos()){
+        Cliente cliente = gson.fromJson(json, Cliente.class);
+       if(Validaciones.ValidarInisioSesion(cliente)){
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
        }
-         return  AutenticacionDAO.verificarSesionCliente(json);
+         return  AutenticacionDAO.verificarSesionCliente(cliente);
     }
 }

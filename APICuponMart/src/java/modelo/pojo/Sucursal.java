@@ -6,16 +6,16 @@ public class Sucursal {
     private Integer idSucursal;
     private String nombre;
     private String telefono;
-    private double latitud;
-    private double longitud;
+    private Double latitud;
+    private Double longitud;
     private String nombreEncargado;
     private String empresaRFC;
-    private Integer direccionID;
+
 
     public Sucursal() {
     }
 
-    public Sucursal(Integer idSucursal, String nombre, String telefono, double latitud, double longitud, String nombreEncargado, String empresaRFC, Integer direccionID) {
+    public Sucursal(Integer idSucursal, String nombre, String telefono, Double latitud, Double longitud, String nombreEncargado, String empresaRFC) {
         this.idSucursal = idSucursal;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -23,7 +23,7 @@ public class Sucursal {
         this.longitud = longitud;
         this.nombreEncargado = nombreEncargado;
         this.empresaRFC = empresaRFC;
-        this.direccionID = direccionID;
+      
     }
 
     public Integer getIdSucursal() {
@@ -54,11 +54,11 @@ public class Sucursal {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public double getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
@@ -82,16 +82,4 @@ public class Sucursal {
         this.empresaRFC = empresaRFC;
     }
 
-    public Integer getDireccionID() {
-        return direccionID;
-    }
-
-    public void setDireccionID(Integer direccionID) {
-        this.direccionID = direccionID;
-    }
-
- public Boolean validarDatos(){
-     return  this.empresaRFC == null && this.direccionID < 0 && this.nombre == null && this.telefono == null && this.nombreEncargado == null;
- 
-    }
 }

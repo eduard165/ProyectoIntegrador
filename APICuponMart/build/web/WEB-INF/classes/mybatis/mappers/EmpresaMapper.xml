@@ -5,19 +5,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="empresa">
     <insert id="agregarEmpresa" parameterType="modelo.pojo.Empresa">
-        INSERT INTO Empresa (nombre, nombreComercial, logo, representanteLegal, email, telefono, paginaWeb, RFC, estatusID, direccionID)
-        VALUES (#{nombre}, #{nombreComercial}, #{logo}, #{representanteLegal}, #{email}, #{telefono}, #{paginaWeb}, #{RFC}, #{estatusID}, #{direccionID})
+        INSERT INTO Empresa (nombre, nombreComercial, representanteLegal, email, telefono, paginaWeb, RFC, estatusID)
+        VALUES (#{nombre}, #{nombreComercial}, #{representanteLegal}, #{email}, #{telefono}, #{paginaWeb}, #{RFC}, #{estatusID})
     </insert>
     <update id="editarEmpresa" parameterType="modelo.pojo.Empresa">
         UPDATE Empresa
         SET nombre = #{nombre},
-            nombreComercial = #{nombreComercial},
-            representanteLegal = #{representanteLegal},
-            email = #{email},
-            telefono = #{telefono},
-            paginaWeb = #{paginaWeb},
-            estatusID = #{estatusID},
-            direccionID = #{direccionID} 
+        nombreComercial = #{nombreComercial},
+        representanteLegal = #{representanteLegal},
+        email = #{email},
+        telefono = #{telefono},
+        paginaWeb = #{paginaWeb},
+        estatusID = #{estatusID}
         WHERE RFC = #{RFC}
     </update>
     <delete id="eliminarEmpresa" parameterType="String">
@@ -27,9 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="buscarEmpresa" resultType="modelo.pojo.Empresa" parameterType="String">
         SELECT *
         FROM Empresa
-        WHERE nombre LIKE  #{param}
-        OR RFC LIKE #{param}
-        OR representanteLegal LIKE #{param}
+        WHERE nombre LIKE CONCAT('%', #{param}, '%')
+        OR RFC LIKE CONCAT('%', #{param}, '%')
+        OR representanteLegal LIKE CONCAT('%', #{param}, '%')
     </select>
     <select id="contarSucursalesAsociadas" resultType="int" parameterType="String">
         SELECT COUNT(*) FROM Sucursal

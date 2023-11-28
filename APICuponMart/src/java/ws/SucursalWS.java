@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 import modelo.SucursalDAO;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Sucursal;
+import utilidades.Validaciones;
 
 @Path("sucursales")
 public class SucursalWS {
@@ -32,20 +33,20 @@ public class SucursalWS {
     public Mensaje registrarSucursal(String json) {
         Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-        if (sucursal == null && sucursal.validarDatos()) {
+        if (Validaciones.validarSucursal(sucursal)) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.agregarSucursal(sucursal);
     }
 
     @PUT
-    @Path("/editarl")
+    @Path("/editar")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje editarSucursal(String json) {
         Gson gson = new Gson();
         Sucursal sucursal = gson.fromJson(json, Sucursal.class);
-        if (sucursal == null && sucursal.validarDatos() ) {
+        if (Validaciones.validarSucursal(sucursal) ) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return SucursalDAO.editarSucursal(sucursal);

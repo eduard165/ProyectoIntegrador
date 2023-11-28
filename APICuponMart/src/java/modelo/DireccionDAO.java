@@ -2,11 +2,10 @@ package modelo;
 
 import modelo.pojo.Cliente;
 import modelo.pojo.Direccion;
-import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
-import modelo.pojo.Sucursal;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import utilidades.Validaciones;
 
 public class DireccionDAO {
 
@@ -14,101 +13,190 @@ public class DireccionDAO {
         Mensaje msj = new Mensaje();
         msj.setError(true);
 
-        try (SqlSession sqlSession = MyBatisUtil.getSession()) {
-            if (sqlSession != null) {
-                switch (direccion.campoLleno()) {
-                    case 1:
-                        procesarConsultaInset(sqlSession, "direccion.agregarDireccionPorEmpresa", direccion, msj,
-                                "Se agregó correctamente el domicilio de la empresa",
-                                "No se pudo agregar el domicilio de la empresa, intenta nuevamente");
-                        break;
-                    case 2:
-                        procesarConsultaInset(sqlSession, "direccion.agregarDireccionPorCliente", direccion, msj,
-                                "Se agregó correctamente el domicilio",
-                                "No se pudo agregar el domicilio correctamente, intenta nuevamente");
-                        break;
-                    case 3:
-                        procesarConsultaInset(sqlSession, "direccion.agregarDireccionPorSucursal", direccion, msj,
-                                "Se agregó correctamente el domicilio de la sucursal",
-                                "No se pudo agregar el domicilio de la sucursal, intenta nuevamente");
-                        break;
-                    default:
-                        msj.setMensaje("Error: campos no válidos");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            msj.setMensaje("ERROR: " + e.getMessage());
+        switch (Validaciones.validarTipoDireccion(direccion)) {
+            case 1:
+                msj = registrarDireccionEmpresa(direccion);
+                break;
+            case 2:
+                msj = registrarDireccionCliente(direccion);
+                break;
+            case 3:
+                msj = registrarDireccionSucursal(direccion);
+                break;
+            default:
+                msj.setMensaje("ERROR: campos no válidos");
         }
-
         return msj;
     }
 
     public static Mensaje editarDomicilio(Direccion direccion) {
         Mensaje msj = new Mensaje();
         msj.setError(true);
-
-        try (SqlSession sqlSession = MyBatisUtil.getSession()) {
-            if (sqlSession != null) {
-                switch (direccion.campoLleno()) {
-                    case 1:
-                        procesarConsultaUpdate(sqlSession, "direccion.editarDireccionPorEmpresa", direccion, msj,
-                                "Se agregó correctamente el domicilio de la empresa",
-                                "No se pudo agregar el domicilio de la empresa, intenta nuevamente");
-                        break;
-                    case 2:
-                        procesarConsultaUpdate(sqlSession, "direccion.editarDireccionPorCliente", direccion, msj,
-                                "Se agregó correctamente el domicilio",
-                                "No se pudo agregar el domicilio correctamente, intenta nuevamente");
-                        break;
-                    case 3:
-                        procesarConsultaUpdate(sqlSession, "direccion.editarDireccionPorSucursal", direccion, msj,
-                                "Se agregó correctamente el domicilio de la sucursal",
-                                "No se pudo agregar el domicilio de la sucursal, intenta nuevamente");
-                        break;
-                    default:
-                        msj.setMensaje("Error: campos no válidos");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            msj.setMensaje("ERROR: " + e.getMessage());
+        
+        switch (Validaciones.validarTipoDireccion(direccion)) {
+            case 1:
+                msj = editarDireccionEmpresa(direccion);
+                break;
+            case 2:
+                msj = editarDireccionCliente(direccion);
+                break;
+            case 3:
+                msj = editarDireccionSucursal(direccion);
+                break;
+            default:
+                msj.setMensaje("ERROR: campos no válidos");
         }
-
         return msj;
     }
-    
-    private static void procesarConsultaInset(SqlSession sqlSession, String consulta, Direccion direccion, Mensaje msj, String mensajeExito, String mensajeError) {
-        try {
-            int filasAfectadas = sqlSession.insert(consulta, direccion);
-            sqlSession.commit();
 
-            if (filasAfectadas > 0) {
-                msj.setError(false);
-                msj.setMensaje(mensajeExito);
-            } else {
-                msj.setMensaje(mensajeError);
+    private static Mensaje registrarDireccionSucursal(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.insert("direccion.agregarDireccionPorSucursal", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion registrada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo registrar la direccion de la sucursal, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            msj.setMensaje("ERROR: " + e.getMessage());
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para guardar el domicilio");
         }
+        return msj;
     }
 
-    private static void procesarConsultaUpdate(SqlSession sqlSession, String consulta, Direccion direccion, Mensaje msj, String mensajeExito, String mensajeError) {
-        try {
-            int filasAfectadas = sqlSession.update(consulta, direccion);
-            sqlSession.commit();
-            if (filasAfectadas > 0) {
-                msj.setError(false);
-                msj.setMensaje(mensajeExito);
-            } else {
-                msj.setMensaje(mensajeError);
+    private static Mensaje registrarDireccionEmpresa(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.insert("direccion.agregarDireccionPorEmpresa", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion registrada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo registrar la direccion de la empresa, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            msj.setMensaje("ERROR: " + e.getMessage());
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para guardar el domicilio");
         }
+        return msj;
+    }
+
+    private static Mensaje registrarDireccionCliente(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.insert("direccion.agregarDireccionPorCliente", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion registrada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo registrar la direccion correctamente, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
+            }
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para guardar el domicilio");
+        }
+        return msj;
+    }
+
+    private static Mensaje editarDireccionSucursal(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.update("direccion.editarDireccionPorSucursal", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion editada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo editar la direccion de la sucursal, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
+            }
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para actualizar el domicilio");
+        }
+        return msj;
+    }
+
+    private static Mensaje editarDireccionEmpresa(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.insert("direccion.editarDireccionPorEmpresa", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion editada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo editar la direccion de la empresa, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
+            }
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para actualizar el domicilio");
+        }
+        return msj;
+    }
+
+    private static Mensaje editarDireccionCliente(Direccion direccion) {
+        Mensaje msj = new Mensaje();
+        msj.setError(true);
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        if (sqlSession != null) {
+            try {
+                int filasAfectadas = sqlSession.insert("direccion.editarDireccionPorCliente", direccion);
+                sqlSession.commit();
+                if (filasAfectadas > 0) {
+                    msj.setError(false);
+                    msj.setMensaje("Direccion editada correctamente");
+                } else {
+                    msj.setMensaje("No se pudo editar la direccion correctamente, intenta nuevamente");
+                }
+            } catch (Exception e) {
+                msj.setMensaje("ERROR: " + e.getMessage());
+            } finally {
+                sqlSession.close();
+            }
+        }else{
+            msj.setMensaje("Por el momento no hay conexion para actualizar el domicilio");
+        }
+        return msj;
     }
 
     public static Direccion obtenerDomicilioEmpresa(String empresaRFC) {

@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 public class AutenticacionDAO {
 
-    public static RespuestaLoginUsuario verificarSesionUsuario(String jsonParam) {
+    public static RespuestaLoginUsuario verificarSesionUsuario(Usuario usuario) {
         RespuestaLoginUsuario respuesta = new RespuestaLoginUsuario();
         respuesta.setError(true);
 
@@ -19,13 +19,11 @@ public class AutenticacionDAO {
         if (conexionBD != null) {
             try {
                 Gson gson = new Gson();
-                Usuario usuarioParam = gson.fromJson(jsonParam, Usuario.class);
-
-                Usuario usuario = conexionBD.selectOne("autenticacion.verificarCredencialesUsuario", usuarioParam);
+                 usuario = conexionBD.selectOne("autenticacion.verificarCredencialesUsuario", usuario);
 
                 if (usuario != null) {
                     respuesta.setError(false);
-                    respuesta.setContenido("Bienvenid(@) " + usuario.getNombre() + " al sistema de control nutricional.");
+                    respuesta.setContenido("Bienvenid(@) " + usuario.getNombre() + " al sistema .");
                     respuesta.setUsuario(usuario);
                 } else {
                     respuesta.setContenido("Numero de personal y/o contraseña incorrectos, favor de verificar");
@@ -43,7 +41,7 @@ public class AutenticacionDAO {
         return respuesta;
     }
     
-    public static RespuestaLoginCliente verificarSesionCliente(String jsonParam) {
+    public static RespuestaLoginCliente verificarSesionCliente(Cliente cliente) {
         RespuestaLoginCliente respuesta = new RespuestaLoginCliente();
         respuesta.setError(true);
 
@@ -51,13 +49,12 @@ public class AutenticacionDAO {
         if (conexionBD != null) {
             try {
                 Gson gson = new Gson();
-                Cliente clienteParam = gson.fromJson(jsonParam, Cliente.class);
 
-                  Cliente cliente = conexionBD.selectOne("autenticacion.verificarCredencialesCliente", clienteParam);
+             cliente = conexionBD.selectOne("autenticacion.verificarCredencialesCliente", cliente);
 
                 if (cliente != null) {
                     respuesta.setError(false);
-                    respuesta.setContenido("Bienvenid(@) " + cliente.getNombre() + " al sistema de control nutricional.");
+                    respuesta.setContenido("Bienvenid(@) " + cliente.getNombre() + " al sistema .");
                     respuesta.setCliente(cliente);
                 } else {
                     respuesta.setContenido("Numero de personal y/o contraseña incorrectos, favor de verificar");

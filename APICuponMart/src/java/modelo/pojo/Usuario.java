@@ -109,21 +109,5 @@ public class Usuario {
         this.empresaRFC = empresaRFC;
     }
 
-    public String obtenerTipoUsuario() {
-        if (this.rolID != null) {
-            switch (this.rolID) {
-                case 1:
-                    return "Administrador general";
-                case 2:
-                    return "Administrador comercial";
-                default:
-                    return "Rol no especificado";
-            }
-        } else {
-            return "Rol no especificado";
-        }
-    }
-    public Boolean todosAtributosLlenos(){
-        return this.username.isEmpty() && this.password.isEmpty();
-    }
+    
 }

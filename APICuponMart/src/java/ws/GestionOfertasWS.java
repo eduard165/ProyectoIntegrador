@@ -25,6 +25,7 @@ import modelo.pojo.Cupon;
 import modelo.pojo.Empresa;
 import modelo.pojo.Mensaje;
 import modelo.pojo.Promocion;
+import utilidades.Validaciones;
 
 /**
  *
@@ -40,7 +41,7 @@ public class GestionOfertasWS {
     public Mensaje registrarPromocionl(String json) {
         Gson gson = new Gson();
         Promocion promocion = gson.fromJson(json, Promocion.class);
-        if (!promocion.todosAtributosLlenos()) {
+        if (Validaciones.validarPromocion(promocion)) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return PromocionDAO.registrarPromocion(promocion);
@@ -53,7 +54,7 @@ public class GestionOfertasWS {
     public Mensaje editarPromocion(String json) {
         Gson gson = new Gson();
         Promocion promocion = gson.fromJson(json, Promocion.class);
-        if (promocion.todosAtributosLlenos()) {
+        if (Validaciones.validarPromocion(promocion)) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return PromocionDAO.editarPromocion(promocion);

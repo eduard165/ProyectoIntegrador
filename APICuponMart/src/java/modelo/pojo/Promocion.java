@@ -162,17 +162,6 @@ public class Promocion {
     }
 
 
-    public boolean todosAtributosLlenos() {
-        return nombrePromocion != null
-                && descripcion != null
-                && fechaInicio != null
-                && fechaTermino != null
-                && restricciones != null
-                && idTipoPromocion != null
-                && porcentajeDescuento != null
-                && codigoPromocion != null
-                && empresaRFC != null
-                && idEstatus != null;
-    }
+   
 
 }

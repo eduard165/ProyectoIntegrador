@@ -49,7 +49,7 @@ public class EmpresaWS {
     public Mensaje editarEmpresa(String json) {
         Gson gson = new Gson();
         Empresa empresa = gson.fromJson(json, Empresa.class);
-        if (!empresa.validarCamposObligatorios() || !empresa.validarFormatoCorreo()) {
+        if (Validaciones.validarEmpresa(empresa)) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return EmpresaDAO.editarEmpresa(empresa);
@@ -89,7 +89,7 @@ public class EmpresaWS {
     @PUT
     @Path("registrarLogo/{empresaRFC}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje registrarFotografia(@PathParam("empresaRFC") String empresaRFC,byte[] foto) {
+    public Mensaje registrarFotografia(@PathParam("empresaRFC") String empresaRFC, byte[] foto) {
         if (empresaRFC == null && empresaRFC.isEmpty() && foto == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
