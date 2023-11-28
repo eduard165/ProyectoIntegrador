@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="655.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clienteescritoriocuponsmart.Vistas.FXMLAdminUsuariosController">
+   <children>
+      <Pane prefHeight="655.0" prefWidth="198.0" style="-fx-background-color: #78228A;">
+         <children>
+            <Button layoutX="25.0" layoutY="600.0" mnemonicParsing="false" onAction="#btnMenuPrincipal" prefHeight="31.0" prefWidth="103.0" text="Menú">
+               <font>
+                  <Font name="Ebrima" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="64.0" layoutY="55.0" text="Usuario:" textFill="#fcfcfc">
+               <font>
+                  <Font name="Ebrima" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbUsuarioSesion" layoutX="56.0" layoutY="107.0" textFill="#fcfcfc">
+               <font>
+                  <Font name="Ebrima" size="15.0" />
+               </font>
+            </Label>
+            <Button layoutX="28.0" layoutY="229.0" mnemonicParsing="false" onAction="#btnRegistroUsuario" prefHeight="31.0" prefWidth="126.0" text="Agregar" />
+            <Button layoutX="28.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnEdicionUsuario" prefHeight="31.0" prefWidth="126.0" text="Editar" />
+            <Button layoutX="28.0" layoutY="338.0" mnemonicParsing="false" onAction="#btnEliminarUsuario" prefHeight="31.0" prefWidth="126.0" text="Eliminar" />
+         </children>
+      </Pane>
+      <Label layoutX="408.0" layoutY="39.0" text="Lista de Usuarios">
+         <font>
+            <Font name="Ebrima Bold" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tvUsuarios" layoutX="227.0" layoutY="244.0" prefHeight="364.0" prefWidth="730.0" style="-fx-background-color: 9C27B0;">
+        <columns>
+          <TableColumn fx:id="tcNombre" prefWidth="107.0" text="Nombre" />
+          <TableColumn fx:id="tcApellidoPat" prefWidth="144.0" text="Apellido Paterno" />
+            <TableColumn fx:id="tcApellidoMat" prefWidth="141.0" text="Apellido Materno" />
+            <TableColumn fx:id="tcCURP" prefWidth="107.0" text="CURP" />
+            <TableColumn fx:id="tcUsuario" prefWidth="114.0" text="Usuario" />
+            <TableColumn fx:id="tcTipoUsuario" prefWidth="116.0" text="Tipo" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfBuscar" layoutX="416.0" layoutY="167.0" prefHeight="31.0" prefWidth="283.0" />
+      <Label layoutX="416.0" layoutY="139.0" text="Buscar">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package clienteescritoriocuponsmart.Vistas;
 
 import java.net.URL;
@@ -15,24 +19,22 @@ import javafx.scene.control.TableView;
  *
  * @author lizet
  */
-public class FXMLAdminEmpresasController implements Initializable {
+public class FXMLAdminSucursalesController implements Initializable {
 
     @FXML
     private Label lbUsuarioSesion;
     @FXML
     private TableView<?> tvEmpresas;
     @FXML
-    private TableColumn<?, ?> tcRFC;
-    @FXML
-    private TableColumn<?, ?> tcNombre;
-    @FXML
-    private TableColumn<?, ?> tcNombreComercial;
-    @FXML
-    private TableColumn<?, ?> tcTelefono;
-    @FXML
     private TableColumn<?, ?> tcEmail;
     @FXML
     private TableColumn<?, ?> tcRepLegal;
+    @FXML
+    private TableColumn<?, ?> tcNombreSucursal;
+    @FXML
+    private TableColumn<?, ?> tcEncargado;
+    @FXML
+    private TableColumn<?, ?> tcEmpresa;
 
     /**
      * Initializes the controller class.
@@ -47,15 +49,15 @@ public class FXMLAdminEmpresasController implements Initializable {
     }
 
     @FXML
-    private void btnRegistroEmpresa(ActionEvent event) {
+    private void btnRegistroSucursal(ActionEvent event) {
     }
 
     @FXML
-    private void btnEdicionEmpresa(ActionEvent event) {
+    private void btnEdicionSucursal(ActionEvent event) {
     }
 
     @FXML
-    private void btnEliminarEmpresa(ActionEvent event) {
+    private void btnEliminarSucursal(ActionEvent event) {
     }
     
 }
