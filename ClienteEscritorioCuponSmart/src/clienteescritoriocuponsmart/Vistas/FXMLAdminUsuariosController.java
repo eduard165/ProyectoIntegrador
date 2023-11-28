@@ -9,34 +9,35 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author lizet
  */
-public class FXMLAdminEmpresasController implements Initializable {
+public class FXMLAdminUsuariosController implements Initializable {
 
     @FXML
     private Label lbUsuarioSesion;
     @FXML
-    private TableView<?> tvEmpresas;
-    @FXML
-    private TableColumn<?, ?> tcRFC;
+    private TableView<?> tvUsuarios;
     @FXML
     private TableColumn<?, ?> tcNombre;
     @FXML
-    private TableColumn<?, ?> tcNombreComercial;
+    private TableColumn<?, ?> tcApellidoPat;
     @FXML
-    private TableColumn<?, ?> tcTelefono;
+    private TableColumn<?, ?> tcApellidoMat;
     @FXML
-    private TableColumn<?, ?> tcEmail;
+    private TableColumn<?, ?> tcCURP;
     @FXML
-    private TableColumn<?, ?> tcRepLegal;
+    private TableColumn<?, ?> tcUsuario;
+    @FXML
+    private TableColumn<?, ?> tcTipoUsuario;
+    @FXML
+    private TextField tfBuscar;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -47,15 +48,15 @@ public class FXMLAdminEmpresasController implements Initializable {
     }
 
     @FXML
-    private void btnRegistroEmpresa(ActionEvent event) {
+    private void btnRegistroUsuario(ActionEvent event) {
     }
 
     @FXML
-    private void btnEdicionEmpresa(ActionEvent event) {
+    private void btnEdicionUsuario(ActionEvent event) {
     }
 
     @FXML
-    private void btnEliminarEmpresa(ActionEvent event) {
+    private void btnEliminarUsuario(ActionEvent event) {
     }
     
 }

@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author lizet
  */
-public class AdminSucursalesController implements Initializable {
+public class FXMLRegistroPromocionController implements Initializable {
 
     /**
      * Initializes the controller class.
