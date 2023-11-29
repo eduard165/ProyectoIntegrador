@@ -67,7 +67,6 @@ public class Validaciones {
                 && promocion.getPorcentajeDescuento() == null
                 && promocion.getCodigoPromocion().isEmpty()
                 && promocion.getEmpresaRFC().isEmpty()
-                && promocion.getIdEstatus() <= 0
                 && promocion.getIdCategoria() <= 0;
     }
 
