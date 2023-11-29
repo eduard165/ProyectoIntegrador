@@ -60,7 +60,7 @@ public class DireccionWS {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Direccion buscarDireccionCliente(@PathParam("parametro") Integer idCliente) {
-        if (idCliente == null || idCliente < 0) {
+        if (idCliente == null || idCliente <=0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return DireccionDAO.obtenerDomicilioCliente(idCliente);
@@ -70,7 +70,7 @@ public class DireccionWS {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Direccion buscarEmpresa(@PathParam("parametro") Integer idSucursal) {
-        if (idSucursal == null || idSucursal < 0) {
+        if (idSucursal == null || idSucursal <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return DireccionDAO.obtenerDomicilioSucursal(idSucursal);
@@ -83,7 +83,7 @@ public class DireccionWS {
         if (empresaRFC != null && !empresaRFC.isEmpty()) {
             return DireccionDAO.eliminarDireccionEmpresa(empresaRFC);
         } else {
-            return new Mensaje(true, "El RFC no puede estar vacío");
+            return new Mensaje(true, "Campo vacío");
         }
     }
 
@@ -94,7 +94,7 @@ public class DireccionWS {
         if (idCliente != null && idCliente > 0) {
             return DireccionDAO.eliminarDireccionCliente(idCliente);
         } else {
-            return new Mensaje(true, "El RFC no puede estar vacío");
+            return new Mensaje(true, "Campo vacío");
         }
     }
 
@@ -105,7 +105,7 @@ public class DireccionWS {
         if (empresaRFC != null && !empresaRFC.isEmpty()) {
             return DireccionDAO.eliminarDireccionEmpresa(empresaRFC);
         } else {
-            return new Mensaje(true, "El RFC no puede estar vacío");
+            return new Mensaje(true, "Campo vacío");
         }
     }
 }
