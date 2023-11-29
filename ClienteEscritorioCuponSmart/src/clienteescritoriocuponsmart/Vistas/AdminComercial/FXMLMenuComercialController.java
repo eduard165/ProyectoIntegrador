@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clienteescritoriocuponsmart.Vistas;
+package clienteescritoriocuponsmart.Vistas.AdminComercial;
 
-import clienteescritoriocuponsmart.modelo.pojo.Usuario;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -15,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author lizet
  */
-public class FXMLMenuPrincipalController implements Initializable {
+public class FXMLMenuComercialController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -24,9 +23,5 @@ public class FXMLMenuPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    public void inicializarMenu(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

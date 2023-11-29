@@ -38,8 +38,8 @@
             <Font name="Arial" size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="557.0" layoutY="234.0" textFill="#dd1010" />
-      <Label layoutX="556.0" layoutY="315.0" textFill="#dd1010" />
+      <Label fx:id="lbErrorUsername" layoutX="543.0" layoutY="278.0" textFill="#dd1010" />
+      <Label fx:id="lbErrorPassword" layoutX="544.0" layoutY="337.0" textFill="#dd1010" />
       <Button layoutX="589.0" layoutY="375.0" mnemonicParsing="false" onAction="#btnInicioSesion" text="Iniciar sesión">
          <font>
             <Font name="Arial" size="15.0" />
