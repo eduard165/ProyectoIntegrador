@@ -1,2 +1,2 @@
-# ProyectoIntegrador
-aqui estaran los 3 proyectos divididos junto con su material
+# ProyectoIntegrador APICuponSmart
+aqui estara la api con el script de la base de datos
